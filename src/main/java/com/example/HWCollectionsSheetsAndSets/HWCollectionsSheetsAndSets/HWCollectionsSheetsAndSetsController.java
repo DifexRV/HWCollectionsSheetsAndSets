@@ -2,10 +2,10 @@ package com.example.HWCollectionsSheetsAndSets.HWCollectionsSheetsAndSets;
 
 import com.example.HWCollectionsSheetsAndSets.HWCollectionsSheetsAndSets.model.Employee;
 import com.example.HWCollectionsSheetsAndSets.HWCollectionsSheetsAndSets.service.EmployeeService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
@@ -18,25 +18,26 @@ public class HWCollectionsSheetsAndSetsController {
     }
 
     @GetMapping
-    public String employeeList() {
+    public Collection<Employee> employeeList() {
         return employeeServiceimpl.employeeList();
     }
 
     @GetMapping(path = "/add")
-    public String addEmployee(@RequestParam(value = "firstName", required = false) String firstName,
-                              @RequestParam(value = "lastName", required = false) String lastName) {
+    public Employee addEmployee(@RequestParam(value = "firstName", required = false) String firstName,
+                              @RequestParam(value = "lastName", required = false) String lastName) throws Exception {
 
         Employee employee = new Employee(firstName, lastName);
         try {
-            employeeServiceimpl.addEmployee(employee);
+           employeeServiceimpl.addEmployee(employee);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Сотрудник успешно добавлен. Информация: " + employee;
+        return employee;
     }
 
+
     @GetMapping(path = "/remove")
-    public String removeEmployee(@RequestParam(value = "firstName", required = false) String firstName,
+    public Employee removeEmployee(@RequestParam(value = "firstName", required = false) String firstName,
                                  @RequestParam(value = "lastName", required = false) String lastName) throws Exception {
         Employee employee = new Employee(firstName, lastName);
         try {
@@ -44,11 +45,11 @@ public class HWCollectionsSheetsAndSetsController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "Сотрудник " + employee + " успешно удален";
+        return employee;
     }
 
     @GetMapping(path = "/find")
-    public String findEmployee(@RequestParam(value = "firstName", required = false) String firstName,
+    public Employee findEmployee(@RequestParam(value = "firstName", required = false) String firstName,
                                @RequestParam(value = "lastName", required = false) String lastName) throws Exception {
         Employee employee = new Employee(firstName, lastName);
         try {
@@ -56,7 +57,8 @@ public class HWCollectionsSheetsAndSetsController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-          return "Найдено совпадение - " + employee;
+          return employee;
     }
+
 
 }

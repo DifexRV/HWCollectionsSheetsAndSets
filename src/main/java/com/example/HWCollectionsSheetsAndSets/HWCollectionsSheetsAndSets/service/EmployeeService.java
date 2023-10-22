@@ -2,13 +2,15 @@ package com.example.HWCollectionsSheetsAndSets.HWCollectionsSheetsAndSets.servic
 
 import com.example.HWCollectionsSheetsAndSets.HWCollectionsSheetsAndSets.model.Employee;
 
+import java.util.Collection;
+
 public interface EmployeeService {
 
-    String employeeList();
-    void addEmployee(Employee employee) throws Exception;
+    Collection<Employee> employeeList();
+    Employee addEmployee(Employee employee) throws Exception;
 
-    void removeEmployee(Employee employee) throws Exception;
+    Employee removeEmployee(Employee employee) throws Exception;
 
-    void findEmployee(Employee employee) throws Exception;
+    Employee findEmployee(Employee employee) throws Exception;
 
 }
