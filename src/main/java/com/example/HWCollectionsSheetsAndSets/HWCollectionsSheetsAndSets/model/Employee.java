@@ -23,7 +23,7 @@ public class Employee {
     }
 
     public String toString() {
-        return "ФИО Сотрудника: " + getFirstName() + " " + getLastName() + ".";
+        return "firstName: " + getFirstName() + ", lastName: " + getLastName() + ".";
     }
 
     public boolean equals(Object other) {
